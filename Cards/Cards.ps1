@@ -1,4 +1,15 @@
-﻿Function New-CardSuit{
+﻿<#
+.Synopsis
+   Create a deck of cards and shuffle it.
+.DESCRIPTION
+   This is an experiment to see if I can create a deck of cards and shuffle it. Later I will probably try to make it deal out a simple card game like blackjack.
+.EXAMPLE
+   Example of how to use this cmdlet
+.EXAMPLE
+   Another example of how to use this cmdlet
+#>
+
+Function New-CardSuit{
     $CardsPerSuit = @()
     $CardsPerSuit += [PsCustomObject]@{Name='A';Value=1;AltValue=11}
     $CardsPerSuit += [PsCustomObject]@{Name='K';Value=10;AltValue=10}

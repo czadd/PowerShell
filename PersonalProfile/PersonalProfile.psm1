@@ -11,7 +11,7 @@ function script:append-path {
 #region common variables that I like to use
 
 #Set up some variables for everyday use
-$ModulePath = "D:\scripts\Modules"
+$ModulePath = "c:\scripts\czadd\Modules"
 $env:psmodulepath = $env:psmodulepath +";" +$ModulePath  
 set-item -path env:HOME -value (get-item ([environment]::GetFolderPath("MyDocuments"))).Parent.FullName  #Redirecting this back to the default becase AD sets it to a networked directory
 
@@ -53,7 +53,6 @@ $go_locations.Add("desktop", [environment]::GetFolderPath("Desktop"))
 $go_locations.Add("dt", [environment]::GetFolderPath("Desktop"))
 $go_locations.Add("docs", [environment]::GetFolderPath("MyDocuments"))
 $go_locations.Add("recent", [environment]::GetFolderPath("Recent"))
-$go_locations.Add("scripts", "D:\Scripts" )
 
 # Grab each directory from scripts dir and add to the list
 $GoDirs = Get-ChildItem $go_locations.scripts -Directory
@@ -156,7 +155,7 @@ Function Get-MsolCred ([Switch]$NoSave){
     If( -not (Test-Path $CredPath) ) 
     { 
         Write-Verbose "No saved creds.  Get new creds."
-        $LiveCred = Get-credential -Credential ($env:USERNAME + "@ncm.com") 
+        $LiveCred = Get-credential -Credential ($env:USERNAME + "@czadd.com") 
         If( ! $NoSave ){ $LiveCred | Export-Clixml $CredPath }
     }
     Else

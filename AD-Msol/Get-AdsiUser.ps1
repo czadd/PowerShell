@@ -3,7 +3,7 @@
 
 [CmdletBinding()]
 PARAM(
-[Parameter(Mandatory=$false,ValueFromPipelineByPropertyName=$true,Position=0)][String]$SamAccountName
+[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true,Position=0)][String[]]$SamAccountName
 )
 
 If( $SamAccountName ){ $Search = [adsisearcher]"(&(objectCategory=person)(objectClass=User)(Samaccountname=$SamAccountName))" }
@@ -24,6 +24,7 @@ $AdUser = foreach ($user in $UserList ){
                 "Lname" = $user.properties.sn[0]
                 "UPN" = $User.properties.userprincipalname[0]
                 "Title" = $User.Properties.title[0]
+                "LockoutTime" = $User.Properties.lockouttime[0]
             }
         }
         Catch{ Write-Warning "$($User.Properties.samaccountname[0]) cannot be added. Data missing" }

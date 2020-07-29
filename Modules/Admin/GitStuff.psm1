@@ -139,6 +139,8 @@ function Get-GitState { git status }
 Set-Alias ss Get-GitState -Description Git
 
 #Set-Alias s get-gitstatus -Description Git #from posh-git
+Set-Alias gs Write-VcsStatus -Description Git
+
 
 function Get-GitPrettyLog { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit }
 Set-Alias lsd Get-GitPrettyLog -Description Git
@@ -268,16 +270,16 @@ Set-Alias nuke Invoke-GitResetHard -Description Git
 
 #region Posh-Git prompt
 
-function prompt
-{
-    If( Test-Administrator ) { Write-host "[ADMIN] " -ForegroundColor red -NoNewline }
-    $realLASTEXITCODE = $LASTEXITCODE
-    Write-Host($pwd.ProviderPath) -nonewline
-    Write-VcsStatus
-    $global:LASTEXITCODE = $realLASTEXITCODE
-    return "> "
-    If( $x -eq 1 ){ "x" }
-}
+#function prompt
+#{
+#    If( Test-Administrator ) { Write-host "[ADMIN] " -ForegroundColor red -NoNewline }
+#    $realLASTEXITCODE = $LASTEXITCODE
+#    Write-Host($pwd.ProviderPath) -nonewline
+#    Write-VcsStatus
+#    $global:LASTEXITCODE = $realLASTEXITCODE
+#    return "> "
+#    If( $x -eq 1 ){ "x" }
+#}
 
 #endregion
 

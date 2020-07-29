@@ -21,7 +21,7 @@ Function Add-ToPath {
 
 ### Set up some global variables and paths ###
 $user = [Environment]::UserName
-$ModulePath = "d:\repo\sa\Modules"
+$ModulePath = "c:\repo\czadd\Modules"
 If( $env:psmodulepath -notlike "*;$ModulePath;*" ){ $env:psmodulepath = $env:psmodulepath +";" + $ModulePath }
 set-item -path env:HOME -value (get-item ([environment]::GetFolderPath("MyDocuments"))).Parent.FullName
 

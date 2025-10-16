@@ -11,7 +11,7 @@ function script:append-path {
 #region common variables that I like to use
 
 #Set up some variables for everyday use
-$ModulePath = "c:\scripts\czadd\Modules"
+$ModulePath = "c:\users\crsmith\Repo\Modules"
 $env:psmodulepath = $env:psmodulepath +";" +$ModulePath  
 set-item -path env:HOME -value (get-item ([environment]::GetFolderPath("MyDocuments"))).Parent.FullName  #Redirecting this back to the default becase AD sets it to a networked directory
 
@@ -41,7 +41,7 @@ function set-directory ([string] $location) {
 		set-location $go_locations[$location];
 	} else {
 		write-host "Go locations:" -ForegroundColor Green;
-		$go.GetEnumerator() | sort name | ft -AutoSize;
+		$go.GetEnumerator() | Sort-Object name | ft -AutoSize;
         write-output "Syntax: go <location>    e.g. go scripts`n"
 	}
 }
@@ -53,6 +53,7 @@ $go_locations.Add("desktop", [environment]::GetFolderPath("Desktop"))
 $go_locations.Add("dt", [environment]::GetFolderPath("Desktop"))
 $go_locations.Add("docs", [environment]::GetFolderPath("MyDocuments"))
 $go_locations.Add("recent", [environment]::GetFolderPath("Recent"))
+$go_locations.Add("repo",'C:\users\crsmith\Repo')
 
 # Grab each directory from scripts dir and add to the list
 $GoDirs = Get-ChildItem $go_locations.scripts -Directory
@@ -99,15 +100,15 @@ Foreach( $Computer in $ComputerName){
 
         Foreach( $Disk in $LogicalDisks )
         {
-            $LdObject = New-Object –TypeName PSObject
+            $LdObject = New-Object ï¿½TypeName PSObject
             $LdObject | Add-Member -MemberType NoteProperty -Name ComputerName -Value $Computer
-            $LdObject | Add-Member –MemberType NoteProperty –Name Name –Value $Disk.Name
-            $LdObject | Add-Member –MemberType NoteProperty –Name Label –Value $Disk.VolumeName
-            $LdObject | Add-Member –MemberType NoteProperty –Name 'Size (GB)' –Value ( "{0:n2}" -f ($Disk.Size / 1gb) )
-            $LdObject | Add-Member –MemberType NoteProperty –Name 'Used (GB)' –Value ( "{0:n2}" -f (($Disk.Size - $Disk.FreeSpace) / 1gb) )
-            $LdObject | Add-Member –MemberType NoteProperty –Name 'Free (GB)' –Value ( "{0:n2}" -f ($Disk.FreeSpace / 1gb) )
-            $LdObject | Add-Member –MemberType NoteProperty –Name "Free %" –Value ( "{0:n2}" -f ($Disk.Freespace / $Disk.Size  * 100))
-            $LdObject | Add-Member –MemberType NoteProperty –Name DriveType –Value "Logical disk"
+            $LdObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name Name ï¿½Value $Disk.Name
+            $LdObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name Label ï¿½Value $Disk.VolumeName
+            $LdObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name 'Size (GB)' ï¿½Value ( "{0:n2}" -f ($Disk.Size / 1gb) )
+            $LdObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name 'Used (GB)' ï¿½Value ( "{0:n2}" -f (($Disk.Size - $Disk.FreeSpace) / 1gb) )
+            $LdObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name 'Free (GB)' ï¿½Value ( "{0:n2}" -f ($Disk.FreeSpace / 1gb) )
+            $LdObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name "Free %" ï¿½Value ( "{0:n2}" -f ($Disk.Freespace / $Disk.Size  * 100))
+            $LdObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name DriveType ï¿½Value "Logical disk"
             $ColLogicalDisks += $LdObject
         }     
 
@@ -115,14 +116,14 @@ Foreach( $Computer in $ComputerName){
         $MountPoints = Get-WmiObject -ComputerName $Computer -query { Select * from Win32_Volume Where FileSystem Like "NTFS"} | Where {$_.Name -Notmatch "Volume" -And !($_.DriveLetter) }
         Foreach( $MP in $MountPoints )
         {
-            $MpObject = New-Object –TypeName PSObject
+            $MpObject = New-Object ï¿½TypeName PSObject
             $MpObject | Add-Member -MemberType NoteProperty -Name ComputerName -Value $Computer
-            $MpObject | Add-Member –MemberType NoteProperty –Name Name –Value $MP.Name
-            $MpObject | Add-Member –MemberType NoteProperty –Name Label –Value $MP.Label
-            $MpObject | Add-Member –MemberType NoteProperty –Name 'Size (GB)' –Value ( "{0:n2}" -f ($MP.Capacity / 1gb) )
-            $MpObject | Add-Member –MemberType NoteProperty –Name 'Free (GB)' –Value ( "{0:n2}" -f ($MP.FreeSpace / 1gb) )
-            $MpObject | Add-Member –MemberType NoteProperty –Name "Free %" –Value ( "{0:n2}" -f ($mp.Freespace / $mp.Capacity  * 100))
-            $MpObject | Add-Member –MemberType NoteProperty –Name DriveType –Value "Mount Point"
+            $MpObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name Name ï¿½Value $MP.Name
+            $MpObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name Label ï¿½Value $MP.Label
+            $MpObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name 'Size (GB)' ï¿½Value ( "{0:n2}" -f ($MP.Capacity / 1gb) )
+            $MpObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name 'Free (GB)' ï¿½Value ( "{0:n2}" -f ($MP.FreeSpace / 1gb) )
+            $MpObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name "Free %" ï¿½Value ( "{0:n2}" -f ($mp.Freespace / $mp.Capacity  * 100))
+            $MpObject | Add-Member ï¿½MemberType NoteProperty ï¿½Name DriveType ï¿½Value "Mount Point"
             $ColMountPoints += $MpObject
         }
 

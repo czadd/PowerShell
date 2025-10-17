@@ -1,5 +1,5 @@
 <#############################################################################################
-testx
+
  365 MFA Report
  Author: Curtis Cannon (Traversecloud.co.uk)
  https://traversecloud.co.uk/generate-authentication-methods-report-with-a-ms-graph-powershell-script

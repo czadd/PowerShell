@@ -46,7 +46,6 @@ function set-directory ([string] $location) {
 	}
 }
 Set-Alias -name go -value Set-Directory 
-Add-AdminHelp -AliasName go -Description "Go to a directory" -Examples "1: go scripts;2: go (displays choices)"
 
 $go_locations.Add("home", $Env:home)
 $go_locations.Add("desktop", [environment]::GetFolderPath("Desktop"))
@@ -56,8 +55,8 @@ $go_locations.Add("recent", [environment]::GetFolderPath("Recent"))
 $go_locations.Add("repo",'C:\users\crsmith\Repo')
 
 # Grab each directory from scripts dir and add to the list
-$GoDirs = Get-ChildItem $go_locations.scripts -Directory
-Foreach( $dir in $GoDirs ) { $go_locations.add( $dir.name.ToLower(),(Join-Path $go_locations.scripts $dir.name) ) }
+#$GoDirs = Get-ChildItem $go_locations.scripts -Directory
+#Foreach( $dir in $GoDirs ) { $go_locations.add( $dir.name.ToLower(),(Join-Path $go_locations.scripts $dir.name) ) }
 $go = $go_locations
 
 #endregion
